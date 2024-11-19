@@ -1,0 +1,33 @@
+├─src
+│   ├─config
+│   │   ├─inversify.config.ts
+│   │   └─types.ts
+│   ├─modules
+│   │   ├─common
+│   │   │   └─infrastructure
+│   │   │       └─middleware
+│   │   └─products
+│   │       ├─api
+│   │       │   ├─controllers
+│   │       │   │   └─ProductController.ts
+│   │       │   └─routes
+│   │       │       └─productRoutes.ts
+│   │       ├─application
+│   │       │   └─use_cases
+│   │       │       └─GetPaginatedProductsUseCase.ts
+│   │       ├─domain
+│   │       │   └─repositories
+│   │       │       └─ProductRepository.ts
+│   │       └─infrastructure
+│   │           └─service
+│   │               └─ProductAPIRepository.ts
+│   └─index.ts
+├─.env
+├─.env_dev
+├─.gitignore
+├─docker-compose.yml
+├─package-lock.json
+├─package.json
+├─README.md
+├─tree.txt
+└─tsconfig.json
