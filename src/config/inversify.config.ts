@@ -12,6 +12,11 @@ import { GetCartUseCase } from '../modules/cart/application/use_cases/GetCartUse
 import { UpdateCartItemUseCase } from '../modules/cart/application/use_cases/UpdateCartItemUseCase';
 import { RemoveFromCartUseCase } from '../modules/cart/application/use_cases/RemoveFromCartUseCase';
 import { ClearCartUseCase } from '../modules/cart/application/use_cases/ClearCartUseCase';
+import { UserRepository } from '../modules/users/domain/repositories/UserRepository';
+import { RegisterUserUseCase } from '../modules/users/application/use_cases/RegisterUserUseCase';
+import { MongoUserRepository } from '../modules/users/infrastructure/repositories/MongoUserRepository';
+import { AuthenticateUserUseCase } from '../modules/users/application/use_cases/AuthenticateUserUseCase';
+import { AuthController } from '../modules/users/api/controllers/AuthController';
 
 const container = new Container();
 
@@ -36,5 +41,16 @@ container.bind<UpdateCartItemUseCase>(TYPES.UpdateCartItemUseCase).to(UpdateCart
 container.bind<RemoveFromCartUseCase>(TYPES.RemoveFromCartUseCase).to(RemoveFromCartUseCase);
 container.bind<ClearCartUseCase>(TYPES.ClearCartUseCase).to(ClearCartUseCase);
 // ===End Cart===
+
+// ===Users===
+container.bind<UserRepository>(TYPES.UserRepository).to(MongoUserRepository);
+container
+  .bind<RegisterUserUseCase>(TYPES.RegisterUserUseCase)
+  .to(RegisterUserUseCase);
+container
+  .bind<AuthenticateUserUseCase>(TYPES.AuthenticateUserUseCase)
+  .to(AuthenticateUserUseCase);
+container.bind<AuthController>(TYPES.AuthController).to(AuthController);
+// ===End Users===
 
 export { container };

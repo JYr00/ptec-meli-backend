@@ -5,7 +5,8 @@ import { TYPES } from '../../../../config/types';
 @injectable()
 export class UpdateCartItemUseCase {
     constructor(
-        @inject(TYPES.CartRepository) private cartRepository: CartRepository,
+        @inject(TYPES.CartRepository)
+        private readonly cartRepository: CartRepository,
     ) {}
 
     public async execute(

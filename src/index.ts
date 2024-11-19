@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import productRoutes from './modules/products/api/routes/productRoutes';
 import cartRoutes from './modules/cart/api/routes/cartRoutes';
+import authRoutes from './modules/users/api/routes/authRoutes';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(cors());
 // Registrar rutas
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT ?? 5010;
 

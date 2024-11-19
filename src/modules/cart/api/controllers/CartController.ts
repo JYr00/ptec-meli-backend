@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 import { inject, injectable } from 'inversify';
-import { TYPES } from '../../../../config/types';
+import { AddToCartUseCase } from '../../application/use_cases/AddToCartUseCase';
 import { UpdateCartItemUseCase } from '../../application/use_cases/UpdateCartItemUseCase';
 import { RemoveFromCartUseCase } from '../../application/use_cases/RemoveFromCartUseCase';
 import { GetCartUseCase } from '../../application/use_cases/GetCartUseCase';
-import { AddToCartUseCase } from '../../application/use_cases/AddToCartUseCase';
 import { ClearCartUseCase } from '../../application/use_cases/ClearCartUseCase';
+import { TYPES } from '../../../../config/types';
+import { AuthenticatedRequest } from '../../../../middleware/authMiddleware';
+
 
 @injectable()
 export class CartController {
@@ -22,9 +24,14 @@ export class CartController {
         private readonly clearCartUseCase: ClearCartUseCase,
     ) {}
 
-    public addToCart = async (req: Request, res: Response) => {
+    public addToCart = async (
+        req: AuthenticatedRequest,
+        res: Response,
+    ): Promise<void> => {
         try {
-            const { userId, productId, name, price, quantity } = req.body;
+            const userId = req.user!.id;
+            const { productId, name, price, quantity } = req.body;
+
             await this.addToCartUseCase.execute(
                 userId,
                 productId,
@@ -38,9 +45,14 @@ export class CartController {
         }
     };
 
-    public updateCartItem = async (req: Request, res: Response) => {
+    public updateCartItem = async (
+        req: AuthenticatedRequest,
+        res: Response,
+    ): Promise<void> => {
         try {
-            const { userId, productId, quantity } = req.body;
+            const userId = req.user!.id;
+            const { productId, quantity } = req.body;
+
             await this.updateCartItemUseCase.execute(
                 userId,
                 productId,
@@ -54,9 +66,14 @@ export class CartController {
         }
     };
 
-    public removeFromCart = async (req: Request, res: Response) => {
+    public removeFromCart = async (
+        req: AuthenticatedRequest,
+        res: Response,
+    ): Promise<void> => {
         try {
-            const { userId, productId } = req.body;
+            const userId = req.user!.id;
+            const { productId } = req.body;
+
             await this.removeFromCartUseCase.execute(userId, productId);
             res.status(200).json({ message: 'Producto eliminado del carrito' });
         } catch (error: any) {
@@ -64,9 +81,13 @@ export class CartController {
         }
     };
 
-    public getCart = async (req: Request, res: Response) => {
+    public getCart = async (
+        req: AuthenticatedRequest,
+        res: Response,
+    ): Promise<void> => {
         try {
-            const { userId } = req.params;
+            const userId = req.user!.id;
+
             const cart = await this.getCartUseCase.execute(userId);
             res.status(200).json(cart);
         } catch (error: any) {
@@ -74,9 +95,13 @@ export class CartController {
         }
     };
 
-    public clearCart = async (req: Request, res: Response) => {
+    public clearCart = async (
+        req: AuthenticatedRequest,
+        res: Response,
+    ): Promise<void> => {
         try {
-            const { userId } = req.body;
+            const userId = req.user!.id;
+
             await this.clearCartUseCase.execute(userId);
             res.status(200).json({ message: 'Carrito limpiado exitosamente' });
         } catch (error: any) {

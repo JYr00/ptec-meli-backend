@@ -15,4 +15,11 @@ export const TYPES = {
     RemoveFromCartUseCase: Symbol.for('RemoveFromCartUseCase'),
     ClearCartUseCase: Symbol.for('ClearCartUseCase'),
     // ===End Cart===
+
+    // ===Users===
+    UserRepository: Symbol.for('UserRepository'),
+    RegisterUserUseCase: Symbol.for('RegisterUserUseCase'),
+    AuthenticateUserUseCase: Symbol.for('AuthenticateUserUseCase'),
+    AuthController: Symbol.for('AuthController'),
+    // ===End Users===
 };
