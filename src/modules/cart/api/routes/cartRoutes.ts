@@ -9,8 +9,8 @@ const cartController = container.get<CartController>(TYPES.CartController);
 
 cartRoutes.post('/add', authMiddleware, cartController.addToCart);
 cartRoutes.put('/update', authMiddleware, cartController.updateCartItem);
-cartRoutes.get('/:userId', authMiddleware, cartController.getCart);
-cartRoutes.delete('/remove', authMiddleware, cartController.removeFromCart);
+cartRoutes.get('/', authMiddleware, cartController.getCart);
+cartRoutes.post('/remove', authMiddleware, cartController.removeFromCart);
 cartRoutes.delete('/clear', authMiddleware, cartController.clearCart);
 
 export default cartRoutes;
