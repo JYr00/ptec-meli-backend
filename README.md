@@ -4,11 +4,12 @@ Este es un proyecto de backend para una tienda en línea, desarrollado con Node.
 
 ## Requisitos Previos
 
-- Node.js versión 22
-- NPM
-- Docker y Docker Compose (para ejecutar MongoDB)
+- **Node.js** versión 22
+- **NPM**
+- **Docker** y **Docker Compose** (para ejecutar la aplicación y MongoDB en contenedores)
+- **Git** (para clonar el repositorio)
 
-## Instalación y Ejecución en Local
+## Instalación y Ejecución con Docker
 
 ### Clonar el repositorio:
 
@@ -23,6 +24,9 @@ cd ptec-meli-backend
 npm install
 ```
 
+### Configurar las variables de entorno:
+Crea un archivo .env en la raíz del proyecto y agrega las variables necesarias, como la URL de conexión a MongoDB y el puerto. Un ejemplo de variables de entorno:
+
 ### Iniciar MongoDB con Docker:
 
 Asegúrate de tener Docker instalado. Para levantar MongoDB, ejecuta:
@@ -33,17 +37,19 @@ docker-compose up -d
 
 Esto iniciará un contenedor de MongoDB en segundo plano.
 
-### Configurar las variables de entorno:
-
-Crea un archivo `.env` en la raíz del proyecto y agrega las variables necesarias, como la URL de conexión a MongoDB y el puerto.
-
-### Iniciar la aplicación:
+### Iniciar MongoDB y la aplicación con Docker:
+Asegúrate de tener Docker instalado. Para levantar MongoDB y la aplicación, ejecuta:
 
 ```bash
-node --run dev
+docker-compose up -d
 ```
 
-La aplicación estará corriendo en [http://localhost:5000](http://localhost:5010).
+Esto iniciará los contenedores de MongoDB y de la aplicación en segundo plano.
+
+### Verificar que todo esté funcionando:
+Puedes verificar que los contenedores estén en funcionamiento con:
+
+La aplicación estará corriendo en [http://localhost:5000](http://localhost:5000).
 
 ## Endpoints Disponibles
 
@@ -66,6 +72,10 @@ La aplicación estará corriendo en [http://localhost:5000](http://localhost:501
 
 ## Notas Adicionales
 
-- Asegúrate de tener Docker instalado y en ejecución.
-- Para levantar MongoDB, utiliza el comando `docker-compose up -d`.
+- Asegúrate de que los puertos 5000 (aplicación) y 27017 (MongoDB) estén disponibles en tu máquina local.
 - Las solicitudes a rutas protegidas deben incluir el token de autenticación en el encabezado `Authorization` con el formato `Bearer <token>`.
+- Para reconstruir la imagen de la aplicación (si cambias las dependencias), ejecuta:
+
+```bash
+docker-compose up -d --build
+```
