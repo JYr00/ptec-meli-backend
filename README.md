@@ -27,16 +27,6 @@ npm install
 ### Configurar las variables de entorno:
 Crea un archivo .env en la raíz del proyecto y agrega las variables necesarias, como la URL de conexión a MongoDB y el puerto. Un ejemplo de variables de entorno:
 
-### Iniciar MongoDB con Docker:
-
-Asegúrate de tener Docker instalado. Para levantar MongoDB, ejecuta:
-
-```bash
-docker-compose up -d
-```
-
-Esto iniciará un contenedor de MongoDB en segundo plano.
-
 ### Iniciar MongoDB y la aplicación con Docker:
 Asegúrate de tener Docker instalado. Para levantar MongoDB y la aplicación, ejecuta:
 
